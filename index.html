@@ -4,6 +4,11 @@
    <title>photo edit window</title>
 </head>
 <style>
+body{
+background:slategrey;
+display:flex;
+align-items:center;
+justify-content: center; }
 .main{
 height:700px;
 width:510px;
@@ -115,7 +120,7 @@ float:left;
  function load(){
    var height=400/ar;
    var width=250*ar; 
- ctx.drawImage(image,0,0,390,250); 
+ ctx.drawImage(image,5,0,390,250); 
     }
  
      brit.onchange=function fun(){
@@ -124,7 +129,7 @@ float:left;
   var s=document.getElementById("sat").value;
   ctx.filter=`brightness(${b}%) saturate(${s}%) contrast(${c}%)`; 
   alert(b+","+s+","+c);
-  ctx.drawImage(image,0,0,390,200);
+  ctx.drawImage(image,5,0,390,450);
    }
   cont.onchange=function fun(){
   var c=document.getElementById("cont").value;
@@ -132,7 +137,7 @@ float:left;
   var s=document.getElementById("sat").value;
   ctx.filter=`brightness(${b}%) saturate(${s}%) contrast(${c}%)`; 
   alert(b+","+s+","+c);
-  ctx.drawImage(image,0,0,390,200);
+  ctx.drawImage(image,5,0,width,height);
    }
   sat.onchange=function fun(){
   var s=document.getElementById("sat").value;
@@ -140,17 +145,17 @@ float:left;
   var c=document.getElementById("cont").value;
   ctx.filter=`brightness(${b}%) saturate(${s}%) contrast(${c}%)`; 
   alert(b+","+s+","+c);
-  ctx.drawImage(image,0,0,390,200);
+  ctx.drawImage(image,5,0,width,height);
    }
  function apply(){
  var height=400/ar;
  var width=250*ar; 
- ctx.drawImage(image,0,0,390,200); 
+ ctx.drawImage(image,5,0,390,250); 
     }
  function flip(){
  alert("flip");
  ctx.scale(-7,1); 
-  ctx.drawImage(image,0,0,390,200); }
+  ctx.drawImage(image,5,0,390,250); }
 
 </script>
 </body>
