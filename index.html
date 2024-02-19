@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>photo edit window</title>
+</head>
+<style>
+.main{
+height:700px;
+width:510px;
+margin:20px;
+background-image:linear-gradient(cyan 35%,magenta 75%); 
+border-radius:5px;
+border:2px solid navy;
+ }
+#ip{
+color:rgb(0,0,0,0);}
+#ip::file-selector-button{
+background:rgb(255,255,255,0.55);
+border:none;
+height:25px;
+border-radius:3px;
+margin-left:80px;
+}
+.in{
+height:250px;
+width:400px;
+background:rgb(255,255,255,0.53);
+margin:10px 0px 10px 50px;
+border-radius:4px;
+border:1px solid whit ; }
+.inn{
+height:250px;
+width:400px;
+background:rgb(255,255,255,0.53);
+margin:10px 0px 10px 50px;
+border-radius:4px;
+border:1px solid whit ; }
+#btn,#btn2{
+background:rgb(255,255,255,0.55);
+border:none;
+border-radius:20px;
+font-size:15px;
+margin-left:80px; }
+#btn2{
+margin-left:350px;
+position: fixed ;
+margin-top:-40px ;
+}
+label{
+border-radius:2px;
+font-size:15px ;
+background:rgb(255,255,255,0.53);
+margin-left:50px; }
+#brit,#sat,#cont{
+width:85px;
+margin-top:15px ; }
+#rt,#fp{
+background:rgb(255,255,255,0.55);
+border:none;
+border-radius:2px;
+font-size:15px;
+margin-left:40px; }
+.btn{
+height:50px;
+width:500px;
+float:left;
+}
+
+</style>
+
+<body>
+<div class="main">
+<div class="in">
+<image src=" " id="img" alt="unable to load an image"
+       style="border-radius:4px"> </image>
+
+</div>
+<input type="file" accept="/image/*" onchange="getimg(event)"
+  id="ip">
+<div class="inn">
+ <canvas id="can"> </canvas>
+
+</div> <div class="btn">
+ <button onclick="load()" id="btn"> Edit </button> <br><br>
+ <button onclick="apply()" id="btn2"> Apply </button>
+</div> 
+<label for="brite">&nbspBRIGHTNESS&nbsp</label>
+ <input type="range" min="0" max="200" value="100" id="brit" >
+<label for="brit"> &nbspSATURATION&nbsp</label>
+ <input type="range" min="0" max="200" value="100" id="sat">
+<label for="brit"> &nbspCONTRAST&nbsp</label>
+ <input type="range" min="0" max="200" value="100" id="cont">
+ <button id="rt" onclick="rotate()"> ROTATE </button>
+ <button id="fp" onclick="flip()" > FLIP </button>
+<div>
+
+<script>
+ var image=document.getElementById("img");
+ const can=document.getElementById("can");
+ var ctx=can.getContext('2d');
+ function getimg(event){
+ var pic=URL.createObjectURL(event.target.files[0]);
+     image.style.display="none";
+     image.src=pic; }
+  image.onload=function onload(){
+  var h=image.height;
+  var w=image.width;
+      image.height=250;
+      image.width=390;
+      can.height=250;
+      can.width=450;
+      ar=w/h;
+      image.style.marginLeft="5px"; 
+      image.style.display="block";  };
+ function load(){
+   var height=400/ar;
+   var width=250*ar; 
+ ctx.drawImage(image,5,0,400,250); 
+    }
+ 
+     brit.onchange=function fun(){
+  var b=document.getElementById("brit").value;
+  var c=document.getElementById("cont").value;
+  var s=document.getElementById("sat").value;
+  ctx.filter=`brightness(${b}%) saturate(${s}%) contrast(${c}%)`; 
+  alert(b+","+s+","+c);
+  ctx.drawImage(image,5,0,400,200);
+   }
+  cont.onchange=function fun(){
+  var c=document.getElementById("cont").value;
+  var b=document.getElementById("brit").value;
+  var s=document.getElementById("sat").value;
+  ctx.filter=`brightness(${b}%) saturate(${s}%) contrast(${c}%)`; 
+  alert(b+","+s+","+c);
+  ctx.drawImage(image,5,0,400,200);
+   }
+  sat.onchange=function fun(){
+  var s=document.getElementById("sat").value;
+  var b=document.getElementById("brit").value;
+  var c=document.getElementById("cont").value;
+  ctx.filter=`brightness(${b}%) saturate(${s}%) contrast(${c}%)`; 
+  alert(b+","+s+","+c);
+  ctx.drawImage(image,5,0,400,200);
+   }
+ function apply(){
+ var height=400/ar;
+ var width=250*ar; 
+ ctx.drawImage(image,5,0,400,200); 
+    }
+ function flip(){
+ alert("flip");
+ ctx.scale(-7,1); 
+  ctx.drawImage(image,5,0,400,200); }
+
+</script>
+</body>
+</html>
